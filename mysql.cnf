@@ -1,0 +1,97 @@
+[mysql]
+port                            = 3306
+socket                          = /var/run/mysqld/mysqld.sock
+
+[mysqld]
+# === Required Settings ===
+basedir                         = /usr
+bind_address                    = 127.0.0.1 # Change to 0.0.0.0 to allow remote connections
+datadir                         = /var/lib/mysql
+#default_authentication_plugin  = mysql_native_password
+max_allowed_packet              = 256M
+max_connect_errors              = 1000000
+pid_file                        = /var/run/mysqld/mysqld.pid
+port                            = 3306
+skip_external_locking
+skip_name_resolve
+socket                          = /var/run/mysqld/mysqld.sock
+tmpdir                          = /tmp
+user                            = mysql
+
+# === InnoDB Settings ===
+default_storage_engine          = InnoDB
+innodb_buffer_pool_instances    = 1
+innodb_buffer_pool_size         = 2G
+innodb_file_per_table           = 1
+innodb_flush_log_at_trx_commit  = 2
+innodb_flush_method             = O_DSYNC
+innodb_log_buffer_size          = 32M
+innodb_log_file_size            = 512M
+innodb_sort_buffer_size         = 4M
+innodb_stats_on_metadata        = 0
+
+innodb_read_io_threads          = 4
+innodb_write_io_threads         = 4
+
+# === Connection Settings ===
+max_connections                 = 50
+
+back_log                        = 512
+thread_cache_size               = 20
+thread_stack                    = 192K
+
+interactive_timeout             = 120
+wait_timeout                    = 120
+
+# === Query Cache Settings ===
+query_cache_limit              = 4M
+query_cache_size               = 64M
+query_cache_type               = 1
+
+# === Other Settings ===
+key_buffer_size                 = 16M
+
+low_priority_updates            = 1
+concurrent_insert               = 2
+
+# === Search Settings ===
+ft_min_word_len                 = 3
+
+# === Binary Logging ===
+disable_log_bin                 = 1
+
+# === Memory Adjustments ===
+tmp_table_size = 128M
+max_heap_table_size = 128M
+
+# === Thread Adjustments ===
+innodb_thread_concurrency = 2  # Hạn chế số luồng đồng thời, phù hợp với 2 core CPU.
+
+# === Query Cache Adjustment (Nếu không sử dụng query cache) ===
+query_cache_size = 0
+query_cache_type = 0
+
+# Buffer Settings
+join_buffer_size                = 4M
+read_buffer_size                = 3M
+read_rnd_buffer_size            = 4M
+sort_buffer_size                = 4M
+
+# Table Settings
+table_open_cache                = 10000
+open_files_limit                = 20000
+
+# === Error & Slow Query Logging ===
+log_error                       = /var/log/mysql/error.log
+log_queries_not_using_indexes   = 0
+long_query_time                 = 2
+slow_query_log                  = 0
+slow_query_log_file             = /var/log/mysql/slow.log
+
+table_definition_cache			= 500
+performance_schema 				= ON
+
+[mysqldump]
+quick
+quote_names
+max_allowed_packet              = 1024M
