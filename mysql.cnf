@@ -84,8 +84,8 @@ long_query_time                 = 2
 slow_query_log                  = 1
 slow_query_log_file             = /var/lib/mysql/mysql_slow.log
 
-table_definition_cache			    = 500
-performance_schema 				      = ON
+table_definition_cache			= 500
+performance_schema				= ON
 
 [mysqldump]
 quick
